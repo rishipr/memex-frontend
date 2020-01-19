@@ -1,0 +1,52 @@
+@import "../style/base.scss";
+
+.feed-search {
+  margin-top: 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 40px;
+  margin-bottom: 24px;
+
+  .link-btn {
+    margin-left: 48px;
+    text-align: right;
+    display: flex;
+    flex-direction: column;
+    width: 100px;
+    color: $primaryBlue;
+    cursor: pointer;
+  }
+}
+
+.input-field {
+  width: 100%;
+  max-width: 900px;
+  outline: none;
+  border: none;
+  padding: 12px;
+  border-bottom: 1px solid rgba($lightGray, 0.5);
+  transition: all 0.25s ease 0s;
+  font-size: 20px !important;
+
+  &:focus,
+  &:hover,
+  &:active {
+    border-bottom: 1px solid $primaryBlue;
+    transition: all 0.25s ease 0s;
+  }
+}
+
+@media (max-width: 960px) {
+  .feed-search {
+    flex-direction: column;
+    align-items: start;
+    height: auto;
+
+    .link-btn {
+      margin-top: 24px;
+      text-align: left;
+      margin-left: 0px;
+    }
+  }
+}

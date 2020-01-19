@@ -1,0 +1,66 @@
+@import "./style/base.scss";
+
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  image-rendering: -moz-crisp-edges;
+}
+
+html {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica,
+    "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol";
+  -ms-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  width: 100%;
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  white-space: pre-wrap;
+  -ms-overflow-style: none;
+  word-break: break-word;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+button {
+  font-size: inherit;
+  font-family: inherit;
+  -webkit-appearance: none;
+}
+
+hr {
+  opacity: $lightGray;
+  margin-top: 16px;
+  margin-bottom: 16px;
+}
+
+a {
+  text-decoration: none;
+}
+
+button {
+  touch-action: manipulation;
+}
+
+ul,
+ol,
+li {
+  list-style-position: inside;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  width: 80%;
+  margin: 0 auto;
+  margin-bottom: 48px;
+  margin-top: 24px;
+}

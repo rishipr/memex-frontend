@@ -1,0 +1,85 @@
+@import "../style/base.scss";
+
+.modal-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba($black, 0.2);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal {
+  width: 80%;
+  height: 480px;
+  background-color: $white;
+  padding: 48px;
+}
+
+.modal-top {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 32px;
+}
+
+.modal-header {
+  font-size: 20px;
+  font-weight: $semibold;
+}
+
+.modal-close {
+  font-size: 12px;
+  color: $primaryGray;
+  cursor: pointer;
+}
+
+.modal-input {
+  width: 100%;
+  outline: none;
+  border: none;
+  padding-bottom: 12px;
+  border-bottom: 1px solid rgba($lightGray, 0.5);
+  margin-bottom: 24px;
+  transition: all 0.25s ease 0s;
+
+  &:focus,
+  &:hover,
+  &:active {
+    border-bottom: 1px solid $primaryBlue;
+    transition: all 0.25s ease 0s;
+  }
+}
+
+.modal-btn {
+  outline: 0;
+  border: none;
+  width: 180px;
+  background: $primaryBlue;
+  color: $white;
+  text-align: center;
+  padding: 12px;
+  font-weight: $semibold;
+  border-radius: 4px;
+  cursor: pointer;
+  opacity: 1;
+  transition: all 0.25s ease 0s;
+
+  &:hover {
+    opacity: 0.95;
+    transition: all 0.25s ease 0s;
+  }
+}
+
+.modal-response {
+  margin-top: 24px;
+}
+
+.error-msg {
+  margin-top: 16px;
+  color: $primaryRed;
+  font-size: 14px;
+}

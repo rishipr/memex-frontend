@@ -1,0 +1,99 @@
+@import "../style/base.scss";
+
+.entry-box {
+  width: 100%;
+  border-bottom: 1px solid rgba($lightGray, 0.5);
+  padding: 12px;
+  box-shadow: 0 0 16px rgba($black, 0);
+  transition: all 0.25s ease 0s;
+  margin-top: 8px;
+  margin-bottom: 8px;
+
+  .article-title,
+  .article-edit {
+    margin-bottom: 0px;
+  }
+
+  div {
+    margin-top: 16px;
+    margin-bottom: 16px;
+  }
+
+  &:hover {
+    box-shadow: 0 0 16px rgba($black, 0.1);
+    transition: all 0.25s ease 0s;
+
+    .entry-top span {
+      display: inline-block;
+      cursor: pointer;
+      opacity: 1;
+      transition: all 0.25s ease 0s;
+    }
+  }
+}
+
+.entry-top {
+  display: flex;
+  justify-content: space-between;
+
+  span {
+    display: none;
+    opacity: 0;
+    color: $primaryGray;
+    margin-left: 24px;
+    transition: all 0.25s ease 0s;
+    &:nth-of-type(1):hover {
+      color: $primaryBlue;
+    }
+
+    &:nth-of-type(2):hover {
+      color: $primaryRed;
+    }
+  }
+}
+
+.article-title {
+  font-size: 20px;
+  transition: all 0.25s ease 0s;
+  text-decoration: none;
+
+  a {
+    &:hover {
+      text-decoration: underline;
+      color: $primaryBlue;
+      cursor: pointer;
+      transition: all 0.25s ease 0s;
+    }
+  }
+}
+
+.article-subinfo,
+.article-date,
+.article-tags {
+  color: $primaryGray;
+}
+
+.article-snippet {
+  color: $primaryDark;
+}
+
+.tag-info {
+  font-size: 12px;
+  color: $primaryBlue;
+  margin-left: 16px;
+}
+
+@media (max-width: 720px) {
+  .entry-top {
+    flex-direction: column;
+    align-items: start;
+
+    .article-edit {
+      span {
+        &:nth-of-type(1) {
+          margin-left: 0px;
+        }
+      }
+    }
+  }
+}
