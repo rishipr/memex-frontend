@@ -1,9 +1,20 @@
 import React, { Component } from "react";
 import "./Entry.scss";
 
+import EditEntry from "./EditEntry";
+
 class Entry extends Component {
+  state = {
+    editModal: false
+  };
+
+  triggerModal = () => {
+    this.setState({ editModal: !this.state.editModal });
+  };
+
   render() {
-    let { tags, title } = this.props;
+    let { entry } = this.props;
+    let { tags, title } = entry;
 
     let tagList;
 
@@ -21,19 +32,22 @@ class Entry extends Component {
       <div className="entry-box">
         <div className="entry-top">
           <div className="article-title">
-            <a href={this.props.fullUrl} target="_blank">
+            <a href={entry.fullUrl} target="_blank" rel="noopener noreferrer">
               {truncatedTitle}
             </a>
           </div>
           <div className="article-edit">
-            <span>Edit</span>
+            <span onClick={this.triggerModal}>Edit</span>
             <span>Delete</span>
           </div>
         </div>
-        <div className="article-subinfo">{this.props.source}</div>
-        <div className="article-snippet">{this.props.snippet}</div>
-        <div className="article-date">{this.props.date}</div>
+        <div className="article-subinfo">{entry.source}</div>
+        <div className="article-snippet">{entry.snippet}</div>
+        <div className="article-date">{entry.date}</div>
         <div className="article-tags">Tags{tagList}</div>
+        {this.state.editModal && (
+          <EditEntry entry={entry} triggerModal={this.triggerModal} />
+        )}
       </div>
     );
   }

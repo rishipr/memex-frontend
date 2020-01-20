@@ -32,8 +32,12 @@ input[type="email"],
 input[type="password"],
 button {
   font-size: inherit;
-  font-family: inherit;
   -webkit-appearance: none;
+}
+
+div,
+input {
+  padding: 0;
 }
 
 hr {
@@ -44,6 +48,7 @@ hr {
 
 a {
   text-decoration: none;
+  color: $primaryBlue;
 }
 
 button {

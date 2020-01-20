@@ -16,6 +16,9 @@
 .logo {
   font-weight: $bold;
   font-size: 24px;
+  a {
+    color: $black;
+  }
 }
 
 .right-information {

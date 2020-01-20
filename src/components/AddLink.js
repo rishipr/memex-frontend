@@ -19,6 +19,10 @@ class AddLink extends Component {
 
     let { articleURL, articleTags, articleNotes } = this.state;
 
+    if (!(articleURL.includes("https://") || articleURL.includes("http://"))) {
+      articleURL = "http://" + articleURL;
+    }
+
     let tagsArr = null;
     if (articleTags) {
       tagsArr = articleTags.replace(" ", "").split(",");
@@ -27,20 +31,19 @@ class AddLink extends Component {
     let payload = {
       url: articleURL,
       tags: tagsArr,
-      notes: articleNotes || null
+      notes: articleNotes || null,
+      uuid: 2
     };
 
-    const USER_ID = 2;
-    const BACKEND = `https://hidden-woodland-77642.herokuapp.com/user/${USER_ID}/add`;
+    const BACKEND = `/entry/create`;
 
     axios
       .post(BACKEND, payload)
       .then(res => {
         addToList(res.data);
 
-        this.props.parentCallback();
-
         this.setState({ loading: false });
+        this.props.parentCallback();
       })
       .catch(err => {
         this.setState({ loading: false, error: true });
