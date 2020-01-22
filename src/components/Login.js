@@ -1,6 +1,9 @@
 import React, { Component } from "react";
-import { Link, Redirect } from "react-router-dom";
+import { Link, Redirect, withRouter } from "react-router-dom";
 import axios from "axios";
+
+import { connect } from "react-redux";
+import { loginUser } from "../actions/authActions";
 
 import "./Auth.scss";
 
@@ -21,24 +24,20 @@ class Login extends Component {
     this.setState({ loading: true });
     let { username, password } = this.state;
 
+    let email = null;
+
+    if (username.includes("@")) {
+      email = username;
+      username = null;
+    }
+
     let payload = {
       username,
+      email,
       password
     };
 
-    const LOGIN_BACKEND = "/login";
-
-    axios
-      .post(LOGIN_BACKEND, payload)
-      .then(res => {
-        this.setState({ loading: false, toDashboard: true });
-        console.log("Success login");
-        console.log(res.data);
-      })
-      .catch(err => {
-        console.log("Error login " + err);
-        this.setState({ loading: false });
-      });
+    this.props.loginUser(payload, this.props.history);
   };
 
   render() {
@@ -46,6 +45,8 @@ class Login extends Component {
       let { username } = this.state;
       return <Redirect to={`/?user=${username}`} />;
     }
+
+    let { loading } = this.props.auth;
 
     return (
       <div className="auth-container">
@@ -56,7 +57,7 @@ class Login extends Component {
         <form onSubmit={this.handleRegister}>
           <div className="form-group">
             <label>
-              <div>Username</div>
+              <div>Username or Email</div>
               <div>
                 <input
                   className="auth-input"
@@ -65,7 +66,7 @@ class Login extends Component {
                   required
                   id="username"
                   name="username"
-                  type="username"
+                  type="text"
                 />
               </div>
             </label>
@@ -90,7 +91,7 @@ class Login extends Component {
             <div className="content error">{this.state.error}</div>
           ) : null}
           <button type="submit" className="modal-btn">
-            {this.state.loading ? "Signing In..." : "Sign In"}
+            {loading ? "Signing In..." : "Sign In"}
           </button>
         </form>
       </div>
@@ -98,4 +99,8 @@ class Login extends Component {
   }
 }
 
-export default Login;
+const mapStateToProps = state => ({
+  auth: state.auth
+});
+
+export default connect(mapStateToProps, { loginUser })(withRouter(Login));

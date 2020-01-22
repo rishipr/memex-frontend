@@ -1,6 +1,8 @@
 import React, { Component } from "react";
-import { Link, Redirect } from "react-router-dom";
-import axios from "axios";
+import { Link, Redirect, withRouter } from "react-router-dom";
+
+import { connect } from "react-redux";
+import { registerUser } from "../actions/authActions";
 
 import "./Auth.scss";
 
@@ -30,17 +32,16 @@ class Register extends Component {
 
     const REGISTER_BACKEND = "/register";
 
-    axios
-      .post(REGISTER_BACKEND, payload)
-      .then(res => {
-        this.setState({ loading: false, toDashboard: true });
-        console.log("Success register");
-        console.log(res.data);
-      })
-      .catch(err => {
-        console.log("Error register " + err);
-        this.setState({ loading: false });
-      });
+    this.props.registerUser(payload, this.props.history);
+
+    // axios
+    //   .post(REGISTER_BACKEND, payload)
+    //   .then(res => {
+    //     this.setState({ loading: false, toDashboard: true });
+    //   })
+    //   .catch(err => {
+    //     this.setState({ loading: false });
+    //   });
   };
 
   render() {
@@ -48,6 +49,8 @@ class Register extends Component {
       let { username } = this.state;
       return <Redirect to={`/?user=${username}`} />;
     }
+
+    let { loading } = this.props.auth;
 
     return (
       <div className="auth-container">
@@ -67,7 +70,7 @@ class Register extends Component {
                   required
                   id="username"
                   name="username"
-                  type="username"
+                  type="text"
                 />
               </div>
             </label>
@@ -108,7 +111,7 @@ class Register extends Component {
             <div className="content error">{this.state.error}</div>
           ) : null}
           <button type="submit" className="modal-btn">
-            {this.state.loading ? "Registering..." : "Register"}
+            {loading ? "Registering..." : "Register"}
           </button>
         </form>
       </div>
@@ -116,4 +119,8 @@ class Register extends Component {
   }
 }
 
-export default Register;
+const mapStateToProps = state => ({
+  auth: state.auth
+});
+
+export default connect(mapStateToProps, { registerUser })(withRouter(Register));

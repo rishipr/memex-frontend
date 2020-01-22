@@ -35,7 +35,7 @@ class AddLink extends Component {
       uuid: 2
     };
 
-    const BACKEND = `/entry/create`;
+    const BACKEND = `https://hidden-woodland-77642.herokuapp.com/entry/create`;
 
     axios
       .post(BACKEND, payload)
