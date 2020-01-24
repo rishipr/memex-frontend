@@ -4,7 +4,7 @@ $black: #000000;
 $lightGray: #dadada;
 $primaryGray: #aaaaaa;
 $primaryDark: #484848;
-$primaryBlue: #4353ff;
+$primaryBlue: hsl(235, 100%, 63%);
 $primaryRed: #d9605a;
 
 @mixin primaryGradient {
@@ -17,6 +17,17 @@ $primaryRed: #d9605a;
   );
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+}
+
+@mixin primaryGradientBtn {
+  background: linear-gradient(270deg, #943cff 0%, #dd45d3 50%, #fd9d52 100%);
+  background-image: linear-gradient(
+    270deg,
+    #943cff 0%,
+    #dd45d3 50%,
+    #fd9d52 100%
+  );
+  color: $white;
 }
 
 // Font weights

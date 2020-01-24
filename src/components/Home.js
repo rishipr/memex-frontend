@@ -3,7 +3,7 @@ import "./Home.scss";
 import { Link } from "react-router-dom";
 
 import brush from "../img/brush.png";
-import memory from "../img/memory.png";
+import memory from "../img/memory-brush.png";
 
 import Typed from "react-typed";
 

@@ -57,14 +57,14 @@
 .modal-btn {
   outline: 0;
   border: none;
-  width: 180px;
   max-width: 100%;
   background: $primaryBlue;
+  // @include primaryGradientBtn;
   color: $white;
   text-align: center;
-  padding: 16px 12px;
+  padding: 12px 28px;
   font-weight: $medium;
-  border-radius: 4px;
+  border-radius: 8px;
   cursor: pointer;
   opacity: 1;
   transform: translateY(0px);
