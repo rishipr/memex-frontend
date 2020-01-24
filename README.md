@@ -1,5 +1,5 @@
 <h1 align="center">
-  Memex
+  Memex (Frontend)
 </h1>
 
 Long term memory management.
@@ -12,14 +12,10 @@ Long term memory management.
 
     [ReactJS](https://www.reactjs.org) is a JavaScript library for building user interfaces
 
-2.  **Flask**
-
-    [Flask](https://github.com/pallets/flask) is a micro framework for building web applications.
-
-3.  **Redux**
+2.  **Redux**
 
     [Redux](https://react-redux.js.org) is a predictable state container for JavaScript applications.
 
-4.  **SASS**
+3.  **SASS**
 
     [SASS](https://sass-lang.com) is the most stable and powerful professional grade CSS extension language in the world.
