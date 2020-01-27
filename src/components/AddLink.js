@@ -35,7 +35,9 @@ class AddLink extends Component {
       uuid: 2
     };
 
-    const BACKEND = `https://hidden-woodland-77642.herokuapp.com/entry/create`;
+    // http://10.0.0.192:5000
+    // http://10.0.0.192:5000
+    const BACKEND = `http://10.0.0.192:5000/entry/create`;
 
     axios
       .post(BACKEND, payload)
@@ -47,7 +49,7 @@ class AddLink extends Component {
       })
       .catch(err => {
         this.setState({ loading: false, error: true });
-        console.log("ERROR: " + err);
+        console.log(err);
       });
   };
 

@@ -18,6 +18,12 @@ class EditEntry extends Component {
     document
       .getElementById("entryNotes")
       .setAttribute("data-placeholder", "Start typing your thoughts...");
+
+    // Convert initial array of tags into string
+    if (Array.isArray(this.props.entry.tags)) {
+      let tagsStr = this.props.entry.tags.join();
+      this.setState({ entryTags: tagsStr });
+    }
   }
 
   handleChange = e => {
@@ -49,7 +55,7 @@ class EditEntry extends Component {
       entry_id: id
     };
 
-    const BACKEND = `/entry/edit`;
+    const BACKEND = `http://10.0.0.192:5000/entry/edit`;
 
     axios
       .post(BACKEND, payload)

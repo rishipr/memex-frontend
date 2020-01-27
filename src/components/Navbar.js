@@ -3,6 +3,7 @@ import "./Navbar.scss";
 import { Link } from "react-router-dom";
 
 import { connect } from "react-redux";
+import { signOut } from "../actions/authActions";
 
 class Navbar extends Component {
   render() {
@@ -20,7 +21,10 @@ class Navbar extends Component {
               <span className="user-info">
                 Signed in as {email || username} ·{" "}
               </span>
-              <span className="logout-info" onClick={() => alert("TODO")}>
+              <span
+                className="logout-info"
+                onClick={() => this.props.signOut()}
+              >
                 Logout
               </span>
             </div>
@@ -44,4 +48,4 @@ const mapStateToProps = state => ({
   auth: state.auth
 });
 
-export default connect(mapStateToProps, {})(Navbar);
+export default connect(mapStateToProps, { signOut })(Navbar);

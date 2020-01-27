@@ -1,4 +1,4 @@
-import { SET_CURRENT_USER, SET_LOADING } from "../actions/types";
+import { SET_CURRENT_USER, SET_LOADING, SIGNOUT_USER } from "../actions/types";
 
 const initialState = {
   isLoggedIn: false,
@@ -9,7 +9,6 @@ const initialState = {
 export default function(state = initialState, action) {
   switch (action.type) {
     case SET_CURRENT_USER:
-      console.log(action.payload);
       return {
         ...state,
         loading: false,
@@ -18,6 +17,12 @@ export default function(state = initialState, action) {
           email: action.payload.email || null,
           username: action.payload.username || null
         }
+      };
+    case SIGNOUT_USER:
+      return {
+        ...state,
+        isLoggedIn: false,
+        user: {}
       };
     case SET_LOADING:
       return {

@@ -2,12 +2,26 @@ import React, { Component } from "react";
 import "./Home.scss";
 import { Link } from "react-router-dom";
 
-import brush from "../img/brush.png";
+import { connect } from "react-redux";
+
 import memory from "../img/memory-brush.png";
 
 import Typed from "react-typed";
 
 class Home extends Component {
+  // Push users to feed if they try to access this page while signed in
+  componentDidMount() {
+    if (this.props.auth.isLoggedIn) {
+      this.props.history.push("/feed");
+    }
+  }
+
+  componentDidUpdate(prevProps) {
+    if (this.props.auth.isLoggedIn !== prevProps.auth.isLoggedIn) {
+      this.props.history.push("/feed");
+    }
+  }
+
   render() {
     return (
       <div className="home-container">
@@ -29,7 +43,6 @@ class Home extends Component {
           loop
           smartBackspace
         />
-        <img className="home-paint" src={brush} alt="brushstrokes" />
         <img className="home-bg" src={memory} alt="brushstrokes" />
         <Link to="/login">Sign In</Link>
         <Link to="/register">Create Account</Link>
@@ -38,4 +51,8 @@ class Home extends Component {
   }
 }
 
-export default Home;
+const mapStateToProps = state => ({
+  auth: state.auth
+});
+
+export default connect(mapStateToProps, {})(Home);

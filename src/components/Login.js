@@ -1,6 +1,5 @@
 import React, { Component } from "react";
-import { Link, Redirect, withRouter } from "react-router-dom";
-import axios from "axios";
+import { Link, withRouter } from "react-router-dom";
 
 import { connect } from "react-redux";
 import { loginUser } from "../actions/authActions";
@@ -9,19 +8,29 @@ import "./Auth.scss";
 
 class Login extends Component {
   state = {
-    username: "",
-    password: "",
-    loading: false,
-    toDashboard: false
+    username: "rishipr",
+    password: "test123"
   };
+
+  // Push users to feed if they try to access this page while signed in
+  componentDidMount() {
+    if (this.props.auth.isLoggedIn) {
+      this.props.history.push("/feed");
+    }
+  }
+
+  componentDidUpdate(prevProps) {
+    if (this.props.auth.isLoggedIn !== prevProps.auth.isLoggedIn) {
+      this.props.history.push("/feed");
+    }
+  }
 
   handleChange = e => {
     this.setState({ [e.target.id]: e.target.value });
   };
 
-  handleRegister = e => {
+  handleLogin = e => {
     e.preventDefault();
-    this.setState({ loading: true });
     let { username, password } = this.state;
 
     let email = null;
@@ -41,20 +50,13 @@ class Login extends Component {
   };
 
   render() {
-    if (this.state.toDashboard) {
-      let { username } = this.state;
-      return <Redirect to={`/?user=${username}`} />;
-    }
-
-    let { loading } = this.props.auth;
-
     return (
       <div className="auth-container">
         <div className="auth-header">Welcome Back</div>
         <span className="auth-info">
           Don't have an account? <Link to="/register">Create Account</Link>
         </span>
-        <form onSubmit={this.handleRegister}>
+        <form onSubmit={this.handleLogin}>
           <div className="form-group">
             <label>
               <div>Username or Email</div>
@@ -91,7 +93,7 @@ class Login extends Component {
             <div className="content error">{this.state.error}</div>
           ) : null}
           <button type="submit" className="modal-btn">
-            {loading ? "Signing In..." : "Sign In"}
+            Sign In
           </button>
         </form>
       </div>

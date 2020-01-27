@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Link, Redirect, withRouter } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 
 import { connect } from "react-redux";
 import { registerUser } from "../actions/authActions";
@@ -10,10 +10,21 @@ class Register extends Component {
   state = {
     username: "",
     email: "",
-    password: "",
-    loading: false,
-    toDashboard: false
+    password: ""
   };
+
+  // Push users to feed if they try to access this page while signed in
+  componentDidMount() {
+    if (this.props.auth.isLoggedIn) {
+      this.props.history.push("/feed");
+    }
+  }
+
+  componentDidUpdate(prevProps) {
+    if (this.props.auth.isLoggedIn !== prevProps.auth.isLoggedIn) {
+      this.props.history.push("/feed");
+    }
+  }
 
   handleChange = e => {
     this.setState({ [e.target.id]: e.target.value });
@@ -21,7 +32,7 @@ class Register extends Component {
 
   handleRegister = e => {
     e.preventDefault();
-    this.setState({ loading: true });
+
     let { username, email, password } = this.state;
 
     let payload = {
@@ -30,28 +41,10 @@ class Register extends Component {
       password
     };
 
-    const REGISTER_BACKEND = "/register";
-
     this.props.registerUser(payload, this.props.history);
-
-    // axios
-    //   .post(REGISTER_BACKEND, payload)
-    //   .then(res => {
-    //     this.setState({ loading: false, toDashboard: true });
-    //   })
-    //   .catch(err => {
-    //     this.setState({ loading: false });
-    //   });
   };
 
   render() {
-    if (this.state.toDashboard) {
-      let { username } = this.state;
-      return <Redirect to={`/?user=${username}`} />;
-    }
-
-    let { loading } = this.props.auth;
-
     return (
       <div className="auth-container">
         <div className="auth-header">Create an Account</div>
@@ -111,7 +104,7 @@ class Register extends Component {
             <div className="content error">{this.state.error}</div>
           ) : null}
           <button type="submit" className="modal-btn">
-            {loading ? "Registering..." : "Register"}
+            Register
           </button>
         </form>
       </div>
