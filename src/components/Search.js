@@ -1,17 +1,29 @@
 import React, { Component } from "react";
 import "./Search.scss";
 
-import { filterList } from "./EntryList";
+import { connect } from "react-redux";
+import { searchEntries, getEntries } from "../actions/entryActions";
+
+import axios from "axios";
 
 class Search extends Component {
   state = {
-    searchTerm: ""
+    query: ""
   };
 
   handleChange = e => {
-    this.setState({ [e.target.id]: e.target.value }, () => {
-      filterList(this.state.searchTerm);
-    });
+    this.setState({ [e.target.id]: e.target.value }, this.handleSearch);
+  };
+
+  handleSearch = () => {
+    let { query } = this.state;
+    const { email } = this.props.auth.user;
+
+    if (query.length) {
+      this.props.searchEntries(query, email);
+    } else {
+      this.props.getEntries(email);
+    }
   };
 
   render() {
@@ -19,9 +31,9 @@ class Search extends Component {
       <div className="feed-search">
         <input
           onChange={this.handleChange}
-          value={this.state.searchTerm}
-          id="searchTerm"
-          name="searchTerm"
+          value={this.state.query}
+          id="query"
+          name="query"
           type="text"
           className="input-field"
           placeholder="Search for articles, snippets, note or tags…"
@@ -34,4 +46,8 @@ class Search extends Component {
   }
 }
 
-export default Search;
+const mapStateToProps = state => ({
+  auth: state.auth
+});
+
+export default connect(mapStateToProps, { searchEntries, getEntries })(Search);

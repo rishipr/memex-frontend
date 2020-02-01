@@ -7,20 +7,16 @@ export const registerUser = (userData, history) => dispatch => {
   dispatch(setLoading());
 
   axios
-    .post("http://10.0.0.192:5000/register", userData)
+    .post("https://floating-cove-27585.herokuapp.com/register", userData)
     .then(res => {
-      if (!res.data.error) {
-        let userResult = {
-          email: res.data.email,
-          username: res.data.username
-        };
+      let userResult = {
+        email: res.data.email,
+        username: res.data.username
+      };
 
-        dispatch(setUser(userResult));
+      dispatch(setUser(userResult));
 
-        history.push("/feed");
-      } else {
-        dispatch(setLoading());
-      }
+      history.push("/feed");
     })
     .catch(err => console.log(err));
 };
@@ -29,11 +25,9 @@ export const loginUser = (userData, history) => dispatch => {
   dispatch(setLoading());
 
   axios
-    .post("http://10.0.0.192:5000/login", userData)
+    .post("https://floating-cove-27585.herokuapp.com/login", userData)
     .then(res => {
       if (!res.data.error) {
-        console.log("LOGIN RESPONSE BELOW");
-        console.log(res.data);
         let userResult = {
           email: res.data.email,
           username: res.data.username

@@ -38,29 +38,11 @@ export const addToList = entry => {
     title: entry.title,
     fullUrl: entry.url,
     source: urlPath,
-    snippet: entry.description,
+    snippet: entry.snippet,
     date: new Date().toString(),
     tags: entry.tags,
     notes: entry.notes,
     id: entry.entry_id
-  };
-
-  EntriesView.push(newEntry);
-};
-
-export const filterList = term => {
-  let newEntry = {
-    title: "Second Title",
-    fullUrl: "www.google.com",
-    source: "google.com",
-    snippet:
-      "Google (GOOGL) plans to offer checking accounts to customers starting next year, a source familiar with Google's plans told CNN Business.",
-    date: new Date().toString(),
-    tags: ["fintech", "google"],
-
-    id: 1,
-    notes:
-      "It's interesting to see Big Tech entering the financial technology space."
   };
 
   EntriesView.push(newEntry);
@@ -78,11 +60,19 @@ class EntryList extends Component {
   }
 
   render() {
-    let entryList = this.state.entriesView.map((entry, i) => (
-      <Entry entry={entry} key={i} />
-    ));
+    let { entryList, entriesLoading } = this.props.entries;
 
-    return <>{entryList}</>;
+    if (entryList.length && !entriesLoading) {
+      let entries = entryList.map((entry, i) => (
+        <Entry entry={entry} key={i} />
+      ));
+
+      return <>{entries}</>;
+    } else if (entriesLoading) {
+      return <div>Loading...</div>;
+    } else {
+      return <div>No entries.</div>;
+    }
   }
 }
 

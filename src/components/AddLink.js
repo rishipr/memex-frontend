@@ -2,6 +2,9 @@ import React, { Component } from "react";
 import "./AddLink.scss";
 import axios from "axios";
 
+import { connect } from "react-redux";
+import { addEntry } from "../actions/entryActions";
+
 import { addToList } from "./EntryList";
 
 class AddLink extends Component {
@@ -16,6 +19,8 @@ class AddLink extends Component {
   addLink = e => {
     e.preventDefault();
     this.setState({ loading: true, error: false });
+
+    const { email } = this.props.auth.user;
 
     let { articleURL, articleTags, articleNotes } = this.state;
 
@@ -32,25 +37,10 @@ class AddLink extends Component {
       url: articleURL,
       tags: tagsArr,
       notes: articleNotes || null,
-      uuid: 2
+      email
     };
 
-    // http://10.0.0.192:5000
-    // http://10.0.0.192:5000
-    const BACKEND = `http://10.0.0.192:5000/entry/create`;
-
-    axios
-      .post(BACKEND, payload)
-      .then(res => {
-        addToList(res.data);
-
-        this.setState({ loading: false });
-        this.props.parentCallback();
-      })
-      .catch(err => {
-        this.setState({ loading: false, error: true });
-        console.log(err);
-      });
+    this.props.addEntry(payload, this.props.parentCallback);
   };
 
   handleChange = e => {
@@ -113,4 +103,8 @@ class AddLink extends Component {
   }
 }
 
-export default AddLink;
+const mapStateToProps = state => ({
+  auth: state.auth
+});
+
+export default connect(mapStateToProps, { addEntry })(AddLink);

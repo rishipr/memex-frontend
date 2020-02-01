@@ -16,8 +16,19 @@
 .logo {
   font-weight: $bold;
   font-size: 24px;
+
   a {
     color: $black;
+  }
+
+  .nuketown {
+    font-size: 10px;
+    font-weight: normal;
+    color: $primaryRed;
+    cursor: pointer;
+    margin-left: 8px;
+    font-family: monospace;
+    text-transform: uppercase;
   }
 }
 

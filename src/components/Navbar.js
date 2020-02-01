@@ -5,7 +5,20 @@ import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { signOut } from "../actions/authActions";
 
+// Temp
+import axios from "axios";
+
 class Navbar extends Component {
+  nukeDB = () => {
+    axios.get("https://floating-cove-27585.herokuapp.com/nuke-db").then(res => {
+      console.log("Tactical nuke deployed on db");
+
+      if (typeof window !== "undefined") {
+        this.props.signOut();
+      }
+    });
+  };
+
   render() {
     let { isLoggedIn } = this.props.auth;
     let { email, username } = this.props.auth.user;
@@ -15,6 +28,9 @@ class Navbar extends Component {
         <div className="navbar">
           <div className="logo">
             <Link to="/">Memex.</Link>
+            <span onClick={this.nukeDB} className="nuketown">
+              Nuketown
+            </span>
           </div>
           {isLoggedIn ? (
             <div className="right-information">

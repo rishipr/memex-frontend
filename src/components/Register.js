@@ -8,9 +8,9 @@ import "./Auth.scss";
 
 class Register extends Component {
   state = {
-    username: "",
-    email: "",
-    password: ""
+    username: "rishipr",
+    email: "rishipr@umich.edu",
+    password: "test123"
   };
 
   // Push users to feed if they try to access this page while signed in

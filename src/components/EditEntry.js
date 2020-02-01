@@ -3,6 +3,9 @@ import "./EditEntry.scss";
 import Editor from "react-medium-editor";
 import axios from "axios";
 
+import { connect } from "react-redux";
+import { updateEntry } from "../actions/entryActions";
+
 require("medium-editor/dist/css/medium-editor.css");
 require("medium-editor/dist/css/themes/default.css");
 
@@ -38,7 +41,8 @@ class EditEntry extends Component {
     e.preventDefault();
 
     let { entryTitle, entrySnippet, entryTags, entryNotes } = this.state;
-    let { id } = this.props.entry;
+    let { _id } = this.props.entry;
+    let { email } = this.props.auth.user;
 
     let tagsArr = null;
     if (entryTags) {
@@ -46,23 +50,16 @@ class EditEntry extends Component {
     }
 
     let payload = {
+      email,
       title: entryTitle,
       snippet: entrySnippet,
       tags: tagsArr,
       notes: entryNotes,
-      uuid: 2,
-      url: "pornhub.com/machine_learning",
-      entry_id: id
+      url: this.props.entry.url,
+      entry_id: _id
     };
 
-    const BACKEND = `http://10.0.0.192:5000/entry/edit`;
-
-    axios
-      .post(BACKEND, payload)
-      .then(res => {
-        console.log(res.data);
-      })
-      .catch(err => console.log(err));
+    this.props.updateEntry(payload, this.props.triggerModal);
   };
 
   render() {
@@ -136,4 +133,8 @@ class EditEntry extends Component {
   }
 }
 
-export default EditEntry;
+const mapStateToProps = state => ({
+  auth: state.auth
+});
+
+export default connect(mapStateToProps, { updateEntry })(EditEntry);
