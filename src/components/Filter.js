@@ -22,7 +22,7 @@ class Filter extends Component {
     let { email } = this.props.auth.user;
 
     axios
-      .get("http://10.0.0.192:5000/user-tags", {
+      .get("https://floating-cove-27585.herokuapp.com/user-tags", {
         params: { email }
       })
       .then(res => {
