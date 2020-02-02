@@ -1,0 +1,21 @@
+@import "../style/base.scss";
+
+.empty-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  img {
+    width: inherit;
+    max-width: 420px;
+    opacity: 0.5;
+    filter: saturate(0);
+  }
+
+  div {
+    font-size: 20px;
+    color: $primaryGray;
+  }
+}

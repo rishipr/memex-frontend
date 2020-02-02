@@ -4,8 +4,6 @@ import "./Search.scss";
 import { connect } from "react-redux";
 import { searchEntries, getEntries } from "../actions/entryActions";
 
-import axios from "axios";
-
 class Search extends Component {
   state = {
     query: ""

@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import "./EditEntry.scss";
 import Editor from "react-medium-editor";
-import axios from "axios";
 
 import { connect } from "react-redux";
 import { updateEntry } from "../actions/entryActions";

@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import "./Entry.scss";
 
 import { connect } from "react-redux";
-import { deleteEntry } from "../actions/entryActions";
+import { setFilteredTag, deleteEntry } from "../actions/entryActions";
 
 import EditEntry from "./EditEntry";
 
@@ -21,6 +21,10 @@ class Entry extends Component {
     this.props.deleteEntry(entry_id, email);
   };
 
+  handleTagSelect = tag => {
+    this.props.setFilteredTag(tag);
+  };
+
   render() {
     let { entry } = this.props;
     let { tags, title } = entry;
@@ -31,7 +35,7 @@ class Entry extends Component {
     if (tags) {
       tagList = tags.map((tag, i) => (
         <span
-          onClick={() => this.props.handleFilter(tag)}
+          onClick={() => this.props.setFilteredTag(tag)}
           key={i}
           className="tag-info"
         >
@@ -71,4 +75,4 @@ const mapStateToProps = state => ({
   auth: state.auth
 });
 
-export default connect(mapStateToProps, { deleteEntry })(Entry);
+export default connect(mapStateToProps, { setFilteredTag, deleteEntry })(Entry);

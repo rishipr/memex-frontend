@@ -5,6 +5,7 @@ import {
   DELETE_ENTRY,
   UPDATE_ENTRY,
   GET_ENTRIES,
+  SET_SELECTED_TAG,
   SET_ENTRIES_LOADING
 } from "./types";
 
@@ -66,6 +67,24 @@ export const searchEntries = (query, email) => dispatch => {
       });
     })
     .catch(err => console.log(err));
+};
+
+export const setFilteredTag = tag => dispatch => {
+  let option = tag
+    ? {
+        value: tag,
+        label: "#" + tag
+      }
+    : null;
+
+  dispatch({
+    type: SET_SELECTED_TAG,
+    payload: option
+  });
+};
+
+export const getUserTags = email => dispatch => {
+  console.log(email);
 };
 
 export const filterEntries = (tag, email) => dispatch => {

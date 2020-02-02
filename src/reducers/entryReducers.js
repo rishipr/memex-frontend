@@ -3,12 +3,14 @@ import {
   DELETE_ENTRY,
   UPDATE_ENTRY,
   GET_ENTRIES,
-  SET_ENTRIES_LOADING
+  SET_ENTRIES_LOADING,
+  SET_SELECTED_TAG
 } from "../actions/types";
 
 const initialState = {
   entryList: [],
-  entriesLoading: false
+  entriesLoading: false,
+  selectedTag: null
 };
 
 export default function(state = initialState, action) {
@@ -46,6 +48,11 @@ export default function(state = initialState, action) {
         ...state,
         entryList: [...state.entryList],
         entriesLoading: false
+      };
+    case SET_SELECTED_TAG:
+      return {
+        ...state,
+        selectedTag: action.payload
       };
     case SET_ENTRIES_LOADING:
       return {
