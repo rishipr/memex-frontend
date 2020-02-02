@@ -78,6 +78,33 @@
   font-size: 12px;
   color: $primaryBlue;
   margin-left: 16px;
+  cursor: pointer;
+}
+
+.selected-tag {
+  font-size: 16px;
+  margin-bottom: 16px;
+  color: $primaryGray;
+
+  span {
+    color: $primaryBlue;
+  }
+
+  .lozenge {
+    cursor: pointer;
+    vertical-align: text-top;
+    font-size: 10px;
+    padding: 4px;
+    border-radius: 4px;
+    color: $primaryGray;
+    background-color: rgba($primaryGray, 0.1);
+    transition: all 0.25s ease 0s;
+
+    &:hover {
+      color: $primaryRed;
+      transition: all 0.25s ease 0s;
+    }
+  }
 }
 
 @media (max-width: 720px) {

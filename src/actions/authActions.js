@@ -3,11 +3,11 @@ import axios from "axios";
 import { SET_CURRENT_USER, SET_LOADING, SIGNOUT_USER } from "./types";
 
 // Register User
-export const registerUser = (userData, history) => dispatch => {
+export const registerUser = (userData, history, setError) => dispatch => {
   dispatch(setLoading());
 
   axios
-    .post("https://floating-cove-27585.herokuapp.com/register", userData)
+    .post("http://10.0.0.192:5000/register", userData)
     .then(res => {
       let userResult = {
         email: res.data.email,
@@ -18,30 +18,28 @@ export const registerUser = (userData, history) => dispatch => {
 
       history.push("/feed");
     })
-    .catch(err => console.log(err));
+    .catch(err => {
+      let error = err.response.data.error;
+      setError(error);
+    });
 };
 
-export const loginUser = (userData, history) => dispatch => {
-  dispatch(setLoading());
-
+export const loginUser = (userData, history, setError) => dispatch => {
   axios
-    .post("https://floating-cove-27585.herokuapp.com/login", userData)
+    .post("http://10.0.0.192:5000/login", userData)
     .then(res => {
-      if (!res.data.error) {
-        let userResult = {
-          email: res.data.email,
-          username: res.data.username
-        };
+      let userResult = {
+        email: res.data.email,
+        username: res.data.username
+      };
 
-        dispatch(setUser(userResult));
+      dispatch(setUser(userResult));
 
-        history.push("/feed");
-      } else {
-        dispatch(setLoading());
-      }
+      history.push("/feed");
     })
     .catch(err => {
-      console.log(err);
+      let error = err.response.data.error;
+      setError(error);
     });
 };
 

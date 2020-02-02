@@ -9,7 +9,8 @@ import "./Auth.scss";
 class Login extends Component {
   state = {
     username: "rishipr",
-    password: "test123"
+    password: "test123",
+    errorMsg: null
   };
 
   // Push users to feed if they try to access this page while signed in
@@ -29,8 +30,14 @@ class Login extends Component {
     this.setState({ [e.target.id]: e.target.value });
   };
 
+  handleError = errorMsg => {
+    this.setState({ errorMsg });
+  };
+
   handleLogin = e => {
     e.preventDefault();
+    this.setState({ errorMsg: null });
+
     let { username, password } = this.state;
 
     let email = null;
@@ -46,7 +53,7 @@ class Login extends Component {
       password
     };
 
-    this.props.loginUser(payload, this.props.history);
+    this.props.loginUser(payload, this.props.history, this.handleError);
   };
 
   render() {
@@ -89,8 +96,8 @@ class Login extends Component {
               </div>
             </label>
           </div>
-          {this.state.error ? (
-            <div className="content error">{this.state.error}</div>
+          {this.state.errorMsg ? (
+            <div className="auth-error">{this.state.errorMsg}</div>
           ) : null}
           <button type="submit" className="modal-btn">
             Sign In

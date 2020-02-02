@@ -59,3 +59,10 @@
     transition: all 0.25s ease 0s;
   }
 }
+
+.auth-error {
+  font-family: monospace;
+  font-size: 12px;
+  margin-bottom: 12px;
+  color: $primaryRed;
+}

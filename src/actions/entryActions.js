@@ -10,7 +10,7 @@ import {
 
 export const addEntry = (entry, closeModal) => dispatch => {
   axios
-    .post("https://floating-cove-27585.herokuapp.com/entry/create", entry)
+    .post("http://10.0.0.192:5000/entry/create", entry)
     .then(res => {
       dispatch({
         type: ADD_ENTRY,
@@ -22,10 +22,11 @@ export const addEntry = (entry, closeModal) => dispatch => {
     .catch(err => console.log(err));
 };
 
-export const deleteEntry = entry_id => dispatch => {
+export const deleteEntry = (entry_id, email) => dispatch => {
   axios
-    .post("https://floating-cove-27585.herokuapp.com/entry/delete", {
-      entry_id
+    .post("http://10.0.0.192:5000/entry/delete", {
+      entry_id,
+      email
     })
     .then(res => {
       dispatch({
@@ -38,7 +39,7 @@ export const deleteEntry = entry_id => dispatch => {
 
 export const updateEntry = (entry, closeModal) => dispatch => {
   axios
-    .post("https://floating-cove-27585.herokuapp.com/entry/edit", entry)
+    .post("http://10.0.0.192:5000/entry/edit", entry)
     .then(res => {
       dispatch({
         type: UPDATE_ENTRY,
@@ -53,7 +54,7 @@ export const updateEntry = (entry, closeModal) => dispatch => {
 export const searchEntries = (query, email) => dispatch => {
   dispatch(setEntriesLoading);
   axios
-    .get("https://floating-cove-27585.herokuapp.com/search", {
+    .get("http://10.0.0.192:5000/search", {
       params: { query, email }
     })
     .then(res => {
@@ -67,10 +68,26 @@ export const searchEntries = (query, email) => dispatch => {
     .catch(err => console.log(err));
 };
 
+export const filterEntries = (tag, email) => dispatch => {
+  dispatch(setEntriesLoading);
+
+  axios
+    .get("http://10.0.0.192:5000/filter", {
+      params: { tag, email }
+    })
+    .then(res => {
+      dispatch({
+        type: GET_ENTRIES,
+        payload: res.data.entries
+      });
+    })
+    .catch(err => console.log(err));
+};
+
 export const getEntries = email => dispatch => {
   dispatch(setEntriesLoading);
   axios
-    .get("https://floating-cove-27585.herokuapp.com/content", {
+    .get("http://10.0.0.192:5000/content", {
       params: {
         email
       }

@@ -10,13 +10,20 @@ import axios from "axios";
 
 class Navbar extends Component {
   nukeDB = () => {
-    axios.get("https://floating-cove-27585.herokuapp.com/nuke-db").then(res => {
-      console.log("Tactical nuke deployed on db");
+    if (
+      window.confirm(
+        "Are you sure you want to deploy a tactical nuke on our DB, mongy?"
+      )
+    ) {
+      axios.get("http://10.0.0.192:5000/nuke-db").then(res => {
+        console.log("Tactical nuke deployed on db");
+        alert("Tactical nuke deployed.");
 
-      if (typeof window !== "undefined") {
-        this.props.signOut();
-      }
-    });
+        if (typeof window !== "undefined") {
+          this.props.signOut();
+        }
+      });
+    }
   };
 
   render() {

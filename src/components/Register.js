@@ -10,7 +10,8 @@ class Register extends Component {
   state = {
     username: "rishipr",
     email: "rishipr@umich.edu",
-    password: "test123"
+    password: "test123",
+    errorMsg: null
   };
 
   // Push users to feed if they try to access this page while signed in
@@ -30,8 +31,13 @@ class Register extends Component {
     this.setState({ [e.target.id]: e.target.value });
   };
 
+  handleError = errorMsg => {
+    this.setState({ errorMsg });
+  };
+
   handleRegister = e => {
     e.preventDefault();
+    this.setState({ errorMsg: null });
 
     let { username, email, password } = this.state;
 
@@ -41,7 +47,7 @@ class Register extends Component {
       password
     };
 
-    this.props.registerUser(payload, this.props.history);
+    this.props.registerUser(payload, this.props.history, this.handleError);
   };
 
   render() {
@@ -100,8 +106,8 @@ class Register extends Component {
               </div>
             </label>
           </div>
-          {this.state.error ? (
-            <div className="content error">{this.state.error}</div>
+          {this.state.errorMsg ? (
+            <div className="auth-error">{this.state.errorMsg}</div>
           ) : null}
           <button type="submit" className="modal-btn">
             Register

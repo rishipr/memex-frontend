@@ -17,7 +17,8 @@ class Entry extends Component {
 
   handleDelete = () => {
     let entry_id = this.props.entry._id;
-    this.props.deleteEntry(entry_id);
+    let { email } = this.props.auth.user;
+    this.props.deleteEntry(entry_id, email);
   };
 
   render() {
@@ -29,7 +30,11 @@ class Entry extends Component {
     let tagList;
     if (tags) {
       tagList = tags.map((tag, i) => (
-        <span key={i} className="tag-info">
+        <span
+          onClick={() => this.props.handleFilter(tag)}
+          key={i}
+          className="tag-info"
+        >
           #{tag.toLowerCase()}
         </span>
       ));

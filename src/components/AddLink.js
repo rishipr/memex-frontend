@@ -1,11 +1,8 @@
 import React, { Component } from "react";
 import "./AddLink.scss";
-import axios from "axios";
 
 import { connect } from "react-redux";
 import { addEntry } from "../actions/entryActions";
-
-import { addToList } from "./EntryList";
 
 class AddLink extends Component {
   state = {
