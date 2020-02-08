@@ -45,9 +45,6 @@ class EditEntry extends Component {
     let { _id } = this.props.entry;
     let { email } = this.props.auth.user;
 
-    // Lowercase everything
-    email = email.toLowerCase();
-
     let payload = {
       email,
       title: entryTitle,

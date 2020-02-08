@@ -12,7 +12,7 @@ import {
 
 export const addEntry = (entry, closeModal) => dispatch => {
   axios
-    .post("http://10.0.0.192:5000/entry/create", entry)
+    .post("https://floating-cove-27585.herokuapp.com/entry/create", entry)
     .then(res => {
       dispatch({
         type: ADD_ENTRY,
@@ -27,7 +27,7 @@ export const addEntry = (entry, closeModal) => dispatch => {
 
 export const deleteEntry = (entry_id, email) => dispatch => {
   axios
-    .post("http://10.0.0.192:5000/entry/delete", {
+    .post("https://floating-cove-27585.herokuapp.com/entry/delete", {
       entry_id,
       email
     })
@@ -43,7 +43,7 @@ export const deleteEntry = (entry_id, email) => dispatch => {
 
 export const updateEntry = (entry, closeModal) => dispatch => {
   axios
-    .post("http://10.0.0.192:5000/entry/edit", entry)
+    .post("https://floating-cove-27585.herokuapp.com/entry/edit", entry)
     .then(res => {
       dispatch({
         type: UPDATE_ENTRY,
@@ -59,7 +59,7 @@ export const updateEntry = (entry, closeModal) => dispatch => {
 export const searchEntries = (query, email) => dispatch => {
   dispatch(setEntriesLoading);
   axios
-    .get("http://10.0.0.192:5000/search", {
+    .get("https://floating-cove-27585.herokuapp.com/search", {
       params: { query, email }
     })
     .then(res => {
@@ -89,7 +89,7 @@ export const setFilteredTag = tag => dispatch => {
 
 export const getUserTags = email => dispatch => {
   axios
-    .get("http://10.0.0.192:5000/user-tags", {
+    .get("https://floating-cove-27585.herokuapp.com/user-tags", {
       params: { email }
     })
     .then(res => {
@@ -107,7 +107,7 @@ export const filterEntries = (tag, email) => dispatch => {
   dispatch(setEntriesLoading);
 
   axios
-    .get("http://10.0.0.192:5000/filter", {
+    .get("https://floating-cove-27585.herokuapp.com/filter", {
       params: { tag, email }
     })
     .then(res => {
@@ -122,7 +122,7 @@ export const filterEntries = (tag, email) => dispatch => {
 export const getEntries = email => dispatch => {
   dispatch(setEntriesLoading);
   axios
-    .get("http://10.0.0.192:5000/content", {
+    .get("https://floating-cove-27585.herokuapp.com/content", {
       params: {
         email
       }

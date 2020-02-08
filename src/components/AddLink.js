@@ -28,9 +28,6 @@ class AddLink extends Component {
 
     let { articleURL, articleTags, articleNotes } = this.state;
 
-    // Lowercase everything
-    email = email.toLowerCase();
-
     if (!(articleURL.includes("https://") || articleURL.includes("http://"))) {
       articleURL = "http://" + articleURL;
     }
@@ -72,6 +69,7 @@ class AddLink extends Component {
             </div>
           </div>
           <form onSubmit={this.addLink}>
+            <span className="modal-label">Article URL *</span>
             <input
               type="text"
               className="modal-input"
@@ -81,17 +79,18 @@ class AddLink extends Component {
               id="articleURL"
               name="articleURL"
               required
-              autoFocus
             />
+            <span className="modal-label">Personal Notes</span>
             <input
               type="text"
               className="modal-input"
-              placeholder="Personal Notes"
+              placeholder="Start typing your thoughts..."
               onChange={this.handleChange}
               value={this.state.articleNotes}
               id="articleNotes"
               name="articleNotes"
             />
+            <span className="modal-label">Tags</span>
             <CreatableSelect
               className="modal-tags-select"
               placeholder="Create or select tags"

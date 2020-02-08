@@ -7,7 +7,7 @@ export const registerUser = (userData, history, setError) => dispatch => {
   dispatch(setLoading());
 
   axios
-    .post("http://10.0.0.192:5000/register", userData)
+    .post("https://floating-cove-27585.herokuapp.com/register", userData)
     .then(res => {
       let userResult = {
         email: res.data.email,
@@ -26,7 +26,7 @@ export const registerUser = (userData, history, setError) => dispatch => {
 
 export const loginUser = (userData, history, setError) => dispatch => {
   axios
-    .post("http://10.0.0.192:5000/login", userData)
+    .post("https://floating-cove-27585.herokuapp.com/login", userData)
     .then(res => {
       let userResult = {
         email: res.data.email,
