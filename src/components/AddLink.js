@@ -6,7 +6,7 @@ import CreatableSelect from "react-select/creatable";
 
 class AddLink extends Component {
   state = {
-    articleURL: "https://www.cnn.com/2019/11/13/tech/google-checking-account/",
+    articleURL: "",
     articleTags: null,
     articleNotes: "",
     userTags: [],
@@ -91,18 +91,20 @@ class AddLink extends Component {
               name="articleNotes"
             />
             <span className="modal-label">Tags</span>
-            <CreatableSelect
-              className="modal-tags-select"
-              placeholder="Create or select tags"
-              onFocus={() => this.setState({ tagsFocused: true })}
-              onBlur={() => this.setState({ tagsFocused: false })}
-              isMulti
-              isClearable
-              isSearchable
-              onChange={this.handleTagsChange}
-              options={this.props.entries.userTags}
-              noOptionsMessage={() => "Start typing to create a new tag"}
-            />
+            <div className="modal-select-tags">
+              <CreatableSelect
+                className="modal-tags-select"
+                placeholder="Create or select tags"
+                onFocus={() => this.setState({ tagsFocused: true })}
+                onBlur={() => this.setState({ tagsFocused: false })}
+                isMulti
+                isClearable
+                isSearchable
+                onChange={this.handleTagsChange}
+                options={this.props.entries.userTags}
+                noOptionsMessage={() => "Start typing to create a new tag"}
+              />
+            </div>
             <button type="submit" className="modal-btn">
               {this.state.loading ? "Adding..." : "Add Link"}
             </button>

@@ -105,25 +105,27 @@ class EditEntry extends Component {
                 name="entrySnippet"
               />
               <span className="modal-label">Tags</span>
-              <CreatableSelect
-                className="modal-tags-select"
-                placeholder="Create or select tags"
-                onFocus={() => this.setState({ tagsFocused: true })}
-                onBlur={() => this.setState({ tagsFocused: false })}
-                isMulti
-                isClearable
-                isSearchable
-                onChange={this.handleTagsChange}
-                defaultValue={
-                  this.props.entry.tags
-                    ? this.props.entries.userTags.filter(tag =>
-                        this.props.entry.tags.includes(tag.value)
-                      )
-                    : null
-                }
-                options={this.props.entries.userTags}
-                noOptionsMessage={() => "Start typing to create a new tag"}
-              />
+              <div className="modal-select-tags">
+                <CreatableSelect
+                  className="modal-tags-select"
+                  placeholder="Create or select tags"
+                  onFocus={() => this.setState({ tagsFocused: true })}
+                  onBlur={() => this.setState({ tagsFocused: false })}
+                  isMulti
+                  isClearable
+                  isSearchable
+                  onChange={this.handleTagsChange}
+                  defaultValue={
+                    this.props.entry.tags
+                      ? this.props.entries.userTags.filter(tag =>
+                          this.props.entry.tags.includes(tag.value)
+                        )
+                      : null
+                  }
+                  options={this.props.entries.userTags}
+                  noOptionsMessage={() => "Start typing to create a new tag"}
+                />
+              </div>
               <div className="modal-edit-btns">
                 <button type="submit" className="modal-btn">
                   {this.state.loading ? "Updating..." : "Update Entry"}

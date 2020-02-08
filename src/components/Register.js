@@ -8,9 +8,9 @@ import "./Auth.scss";
 
 class Register extends Component {
   state = {
-    username: "rishipr",
-    email: "rishipr@umich.edu",
-    password: "test123",
+    username: "",
+    email: "",
+    password: "",
     errorMsg: null
   };
 

@@ -8,8 +8,8 @@ import "./Auth.scss";
 
 class Login extends Component {
   state = {
-    username: "rishipr",
-    password: "test123",
+    username: "",
+    password: "",
     errorMsg: null
   };
 
