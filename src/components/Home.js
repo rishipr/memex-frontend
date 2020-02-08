@@ -27,7 +27,7 @@ class Home extends Component {
       <div className="home-container">
         <div className="home-header">Memex.</div>
         <div className="home-snippet">
-          Rethinking how we manage long-term memory
+          <code>Rethinking how we manage long-term memory</code>
         </div>
         <Typed
           strings={[

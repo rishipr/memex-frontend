@@ -7,7 +7,7 @@ const NoEntries = () => {
   return (
     <div className="empty-container">
       <img src={no_entries} alt="" />
-      <div>No entries found</div>
+      <div>No entries</div>
     </div>
   );
 };

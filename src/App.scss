@@ -27,6 +27,18 @@ body {
   word-break: break-word;
 }
 
+@import url("https://fonts.googleapis.com/css?family=IBM+Plex+Mono&display=swap");
+
+code {
+  background-color: rgba(27, 31, 35, 0.05);
+  border-radius: 3px;
+  color: inherit;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: inherit;
+  margin: 0;
+  padding: 3.2px 6.4px;
+}
+
 input[type="text"],
 input[type="email"],
 input[type="password"],
