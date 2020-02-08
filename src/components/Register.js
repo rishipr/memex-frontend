@@ -41,6 +41,10 @@ class Register extends Component {
 
     let { username, email, password } = this.state;
 
+    // Lowercase everything
+    username = username.toLowerCase();
+    email = email.toLowerCase();
+
     let payload = {
       username,
       email,

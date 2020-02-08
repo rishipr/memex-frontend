@@ -42,6 +42,9 @@ class Login extends Component {
 
     let email = null;
 
+    // Lowercase everything
+    username = username.toLowerCase();
+
     if (username.includes("@")) {
       email = username;
       username = null;

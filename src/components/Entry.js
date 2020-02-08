@@ -47,26 +47,32 @@ class Entry extends Component {
     let truncatedTitle = title.length > 50 ? title.slice(0, 50) + "..." : title;
 
     return (
-      <div className="entry-box">
-        <div className="entry-top">
-          <div className="article-title">
-            <a href={entry.url} target="_blank" rel="noopener noreferrer">
-              {truncatedTitle}
-            </a>
+      <>
+        <div className="entry-box">
+          <div className="entry-top">
+            <div className="article-title">
+              <a href={entry.url} target="_blank" rel="noopener noreferrer">
+                {truncatedTitle}
+              </a>
+            </div>
+            <div className="article-edit">
+              <span onClick={this.triggerModal} className="material-icons">
+                edit
+              </span>
+              <span onClick={this.handleDelete} className="material-icons">
+                delete
+              </span>
+            </div>
           </div>
-          <div className="article-edit">
-            <span onClick={this.triggerModal}>Edit</span>
-            <span onClick={this.handleDelete}>Delete</span>
-          </div>
+          <div className="article-subinfo">{source}</div>
+          <div className="article-snippet">{entry.snippet}</div>
+          <div className="article-date">{entry["add-date"]}</div>
+          <div className="article-tags">Tags{tagList}</div>
         </div>
-        <div className="article-subinfo">{source}</div>
-        <div className="article-snippet">{entry.snippet}</div>
-        <div className="article-date">{entry["add-date"]}</div>
-        <div className="article-tags">Tags{tagList}</div>
         {this.state.editModal && (
           <EditEntry entry={entry} triggerModal={this.triggerModal} />
         )}
-      </div>
+      </>
     );
   }
 }

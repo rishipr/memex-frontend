@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import "./EditEntry.scss";
 import Editor from "react-medium-editor";
+import CreatableSelect from "react-select/creatable";
 
 import { connect } from "react-redux";
 import { updateEntry } from "../actions/entryActions";
@@ -13,19 +14,16 @@ class EditEntry extends Component {
     entryTitle: "" || this.props.entry.title,
     entrySnippet: "" || this.props.entry.snippet,
     entryTags: "" || this.props.entry.tags,
-    entryNotes: "" || this.props.entry.notes
+    entryNotes: "" || this.props.entry.notes,
+    entryTags: null,
+    tagsFocused: false,
+    defaultSelected: null
   };
 
   componentDidMount() {
     document
       .getElementById("entryNotes")
       .setAttribute("data-placeholder", "Start typing your thoughts...");
-
-    // Convert initial array of tags into string
-    if (Array.isArray(this.props.entry.tags)) {
-      let tagsStr = this.props.entry.tags.join();
-      this.setState({ entryTags: tagsStr });
-    }
   }
 
   handleChange = e => {
@@ -39,26 +37,39 @@ class EditEntry extends Component {
   handleSave = e => {
     e.preventDefault();
 
-    let { entryTitle, entrySnippet, entryTags, entryNotes } = this.state;
+    if (this.state.tagsFocused) {
+      return;
+    }
+
+    let { entryTitle, entrySnippet, entryNotes, entryTags } = this.state;
     let { _id } = this.props.entry;
     let { email } = this.props.auth.user;
 
-    let tagsArr = null;
-    if (entryTags) {
-      tagsArr = entryTags.replace(" ", "").split(",");
-    }
+    // Lowercase everything
+    email = email.toLowerCase();
 
     let payload = {
       email,
       title: entryTitle,
       snippet: entrySnippet,
-      tags: tagsArr,
+      tags: entryTags,
       notes: entryNotes,
       url: this.props.entry.url,
       entry_id: _id
     };
 
     this.props.updateEntry(payload, this.props.triggerModal);
+  };
+
+  handleTagsChange = values => {
+    let valueArr = [];
+
+    if (values) {
+      values.forEach(value => valueArr.push(value.value));
+      this.setState({ entryTags: valueArr });
+    } else {
+      this.setState({ entryTags: null });
+    }
   };
 
   render() {
@@ -97,14 +108,24 @@ class EditEntry extends Component {
                 name="entrySnippet"
               />
               <span className="modal-label">Tags</span>
-              <input
-                type="text"
-                className="modal-input"
-                placeholder="Tags (comma-separated)"
-                onChange={this.handleChange}
-                value={this.state.entryTags || ""}
-                id="entryTags"
-                name="entryTags"
+              <CreatableSelect
+                className="modal-tags-select"
+                placeholder="Create or select tags"
+                onFocus={() => this.setState({ tagsFocused: true })}
+                onBlur={() => this.setState({ tagsFocused: false })}
+                isMulti
+                isClearable
+                isSearchable
+                onChange={this.handleTagsChange}
+                defaultValue={
+                  this.props.entry.tags
+                    ? this.props.entries.userTags.filter(tag =>
+                        this.props.entry.tags.includes(tag.value)
+                      )
+                    : null
+                }
+                options={this.props.entries.userTags}
+                noOptionsMessage={() => "Start typing to create a new tag"}
               />
               <div className="modal-edit-btns">
                 <button type="submit" className="modal-btn">
@@ -133,7 +154,8 @@ class EditEntry extends Component {
 }
 
 const mapStateToProps = state => ({
-  auth: state.auth
+  auth: state.auth,
+  entries: state.entries
 });
 
 export default connect(mapStateToProps, { updateEntry })(EditEntry);

@@ -5,6 +5,7 @@ import {
   DELETE_ENTRY,
   UPDATE_ENTRY,
   GET_ENTRIES,
+  GET_USER_TAGS,
   SET_SELECTED_TAG,
   SET_ENTRIES_LOADING
 } from "./types";
@@ -20,6 +21,7 @@ export const addEntry = (entry, closeModal) => dispatch => {
 
       closeModal();
     })
+    .then(() => dispatch(getUserTags(entry.email)))
     .catch(err => console.log(err));
 };
 
@@ -29,12 +31,13 @@ export const deleteEntry = (entry_id, email) => dispatch => {
       entry_id,
       email
     })
-    .then(res => {
+    .then(() => {
       dispatch({
         type: DELETE_ENTRY,
         payload: entry_id
       });
     })
+    .then(() => dispatch(getUserTags(email)))
     .catch(err => console.log(err));
 };
 
@@ -49,6 +52,7 @@ export const updateEntry = (entry, closeModal) => dispatch => {
 
       closeModal();
     })
+    .then(() => dispatch(getUserTags(entry.email)))
     .catch(err => console.log(err));
 };
 
@@ -84,7 +88,19 @@ export const setFilteredTag = tag => dispatch => {
 };
 
 export const getUserTags = email => dispatch => {
-  console.log(email);
+  axios
+    .get("http://10.0.0.192:5000/user-tags", {
+      params: { email }
+    })
+    .then(res => {
+      let { tags } = res.data;
+
+      dispatch({
+        type: GET_USER_TAGS,
+        payload: tags
+      });
+    })
+    .catch(err => console.log(err));
 };
 
 export const filterEntries = (tag, email) => dispatch => {

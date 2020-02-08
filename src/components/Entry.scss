@@ -3,7 +3,7 @@
 .entry-box {
   width: 100%;
   border-bottom: 1px solid rgba($lightGray, 0.5);
-  padding: 12px;
+  padding: 20px;
   box-shadow: 0 0 16px rgba($black, 0);
   transition: all 0.25s ease 0s;
   margin-top: 8px;
@@ -34,7 +34,7 @@
   justify-content: space-between;
 
   span {
-    display: none;
+    display: inline-block;
     opacity: 0;
     color: $primaryGray;
     margin-left: 24px;
