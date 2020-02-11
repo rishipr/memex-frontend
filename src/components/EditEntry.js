@@ -13,9 +13,8 @@ class EditEntry extends Component {
   state = {
     entryTitle: "" || this.props.entry.title,
     entrySnippet: "" || this.props.entry.snippet,
-    entryTags: "" || this.props.entry.tags,
     entryNotes: "" || this.props.entry.notes,
-    entryTags: null,
+    entryTags: this.props.entry.tags,
     tagsFocused: false,
     defaultSelected: null
   };
@@ -24,6 +23,8 @@ class EditEntry extends Component {
     document
       .getElementById("entryNotes")
       .setAttribute("data-placeholder", "Start typing your thoughts...");
+
+    console.log(this.props.entry.tags);
   }
 
   handleChange = e => {
