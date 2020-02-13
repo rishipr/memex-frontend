@@ -25,7 +25,7 @@ class EditEntry extends Component {
       .getElementById("entryNotes")
       .setAttribute("data-placeholder", "Start typing your thoughts...");
 
-    console.log(this.props.entry.tags);
+    console.log(this.props.entry);
   }
 
   handleChange = e => {

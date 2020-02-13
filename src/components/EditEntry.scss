@@ -18,7 +18,19 @@
     display: flex;
     justify-content: flex-end;
     align-items: center;
-    margin-bottom: 32px;
+    margin-bottom: 16px;
+
+    .material-icons {
+      padding: 6px;
+      border-radius: 50%;
+      transition: 0.25s all ease 0s;
+
+      &:hover {
+        transition: 0.25s all ease 0s;
+        color: $primaryBlue;
+        background-color: rgba($primaryBlue, 0.1);
+      }
+    }
   }
 
   .modal-title {

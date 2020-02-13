@@ -14,8 +14,8 @@
 }
 
 .modal {
-  width: 80%;
-  height: 480px;
+  width: 65%;
+  height: 60%;
   background-color: $white;
   padding: 48px;
   transition: all 0.25s ease 0s;
@@ -42,8 +42,17 @@
 .modal-close {
   font-size: 12px;
   color: $primaryGray;
+  padding: 6px;
+  border-radius: 4px;
   cursor: pointer;
   margin-left: 20px;
+  transition: 0.25s ease 0s all;
+
+  &:hover {
+    transition: 0.25s ease 0s all;
+    color: $primaryRed;
+    background-color: rgba($primaryRed, 0.1);
+  }
 }
 
 .modal-expand {
