@@ -16,7 +16,8 @@ class EditEntry extends Component {
     entryNotes: "" || this.props.entry.notes,
     entryTags: this.props.entry.tags,
     tagsFocused: false,
-    defaultSelected: null
+    defaultSelected: null,
+    fullScreen: false
   };
 
   componentDidMount() {
@@ -70,15 +71,33 @@ class EditEntry extends Component {
     }
   };
 
+  handleFullScreen = () => {
+    let modal = document.getElementById("modalUpdate");
+    this.setState({ fullScreen: !this.state.fullScreen }, () => {
+      let { fullScreen } = this.state;
+
+      if (fullScreen) {
+        modal.classList.add("modal-full");
+      } else {
+        modal.classList.remove("modal-full");
+      }
+    });
+  };
+
   render() {
     let { entry } = this.props;
 
     return (
       <div className="modal-bg">
-        <div className="modal modal-edit">
+        <div id="modalUpdate" className="modal modal-edit">
           <form onSubmit={this.handleSave}>
-            <div className="modal-top">
-              <div className="modal-header modal-source">{entry.source}</div>
+            <div className="modal-top-edit">
+              <div
+                className="modal-expand material-icons"
+                onClick={this.handleFullScreen}
+              >
+                {this.state.fullScreen ? "fullscreen_exit" : "fullscreen"}
+              </div>
               <div className="modal-close" onClick={this.props.triggerModal}>
                 Close
               </div>
