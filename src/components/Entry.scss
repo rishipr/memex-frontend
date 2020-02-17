@@ -83,8 +83,22 @@
 .tag-info {
   font-size: 12px;
   color: $primaryBlue;
+  padding: 6px;
+  border-radius: 4px;
   margin-left: 16px;
   cursor: pointer;
+  transition: all 0.25s ease 0s;
+
+  &:hover {
+    background-color: rgba($primaryBlue, 0.05);
+    transition: all 0.25s ease 0s;
+  }
+}
+
+.tag-info-none {
+  font-size: 12px;
+  color: $primaryGray;
+  margin-left: 16px;
 }
 
 .selected-tag {

@@ -15,7 +15,7 @@
 
 .modal {
   width: 65%;
-  height: 60%;
+  min-height: 60%;
   background-color: $white;
   padding: 48px;
   transition: all 0.25s ease 0s;

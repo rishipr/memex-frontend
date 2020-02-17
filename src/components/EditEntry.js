@@ -21,11 +21,10 @@ class EditEntry extends Component {
   };
 
   componentDidMount() {
+    // Set placeholder for personal notes field
     document
       .getElementById("entryNotes")
       .setAttribute("data-placeholder", "Start typing your thoughts...");
-
-    console.log(this.props.entry);
   }
 
   handleChange = e => {
@@ -85,8 +84,6 @@ class EditEntry extends Component {
   };
 
   render() {
-    let { entry } = this.props;
-
     return (
       <div className="modal-bg">
         <div id="modalUpdate" className="modal modal-edit">

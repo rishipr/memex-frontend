@@ -11,6 +11,7 @@ import Feed from "./Feed";
 import Login from "./Login";
 import Register from "./Register";
 import Home from "./Home";
+// import GraphMain from "./GraphMain";
 
 import PrivateRoute from "./PrivateRoute";
 
@@ -24,7 +25,6 @@ class Container extends Component {
       const email = traits[1];
 
       if (expiry < currentTime) {
-        console.log("Access token expired... logging user out");
         this.props.signOut();
       } else if (!this.props.isLoggedIn) {
         let user = {
@@ -43,6 +43,7 @@ class Container extends Component {
         <Route exact path="/login" component={Login} />
         <Route exact path="/register" component={Register} />
         <Route exact path="/" component={Home} />
+        {/* <Route exact path="/graph" component={GraphMain} /> */}
         <Switch>
           <PrivateRoute exact path="/feed" component={Feed} />
         </Switch>

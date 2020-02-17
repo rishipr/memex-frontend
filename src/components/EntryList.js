@@ -7,6 +7,41 @@ import Entry from "./Entry";
 import Spinner from "./Spinner";
 import NoEntries from "./NoEntries";
 
+const MEMEXES = [
+  {
+    memex: "m1",
+    entries: [
+      {
+        id: null,
+        addDate: null,
+        email: null,
+        keywords: null,
+        notes: null,
+        snippet: null,
+        tags: null,
+        title: null,
+        url: null
+      }
+    ]
+  },
+  {
+    memex: "m2",
+    entries: [
+      {
+        id: null,
+        addDate: null,
+        email: null,
+        keywords: null,
+        notes: null,
+        snippet: null,
+        tags: null,
+        title: null,
+        url: null
+      }
+    ]
+  }
+];
+
 class EntryList extends Component {
   componentDidMount() {
     let { email } = this.props.auth.user;

@@ -11,6 +11,10 @@ class Entry extends Component {
     editModal: false
   };
 
+  componentDidMount() {
+    console.log(this.props.entry);
+  }
+
   triggerModal = () => {
     this.setState({ editModal: !this.state.editModal });
   };
@@ -67,7 +71,14 @@ class Entry extends Component {
           <div className="article-subinfo">{source}</div>
           <div className="article-snippet">{entry.snippet}</div>
           <div className="article-date">{entry["add-date"]}</div>
-          <div className="article-tags">Tags{tagList}</div>
+          <div className="article-tags">
+            Tags
+            {tags && tags.length > 0 ? (
+              tagList
+            ) : (
+              <span className="tag-info-none"> none</span>
+            )}
+          </div>
         </div>
         {this.state.editModal && (
           <EditEntry entry={entry} triggerModal={this.triggerModal} />

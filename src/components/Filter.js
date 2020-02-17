@@ -53,7 +53,7 @@ class Filter extends Component {
     return (
       <div className="filter-select">
         <Select
-          placeholder="Filter by tag"
+          placeholder="Filter by Memex"
           isClearable
           isSearchable
           options={this.props.entries.userTags}

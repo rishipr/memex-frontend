@@ -16,6 +16,14 @@
     width: 100px;
     color: $primaryBlue;
     cursor: pointer;
+    padding: 8px 8px;
+    border-radius: 6px;
+    transition: all 0.25s ease 0s;
+
+    &:hover {
+      background: rgba($primaryBlue, 0.05);
+      transition: all 0.25s ease 0s;
+    }
   }
 }
 
