@@ -4,7 +4,7 @@
 
 Long term memory management.
 
-[View Live Site](https://memex-frontend.rishipr.now.sh/)
+[View Live Site](https://memexapp.io/)
 
 ## 🧐  What's this built with?
 
